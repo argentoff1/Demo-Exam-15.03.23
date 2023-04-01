@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Discipline">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Magazine" Relationship="Self.FK_Magazine_Discipline" FromRole="Discipline" ToRole="Magazine" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="YearOfAdmission" Type="Int32" Nullable="false" />
+    <Property Name="Subgroup" Type="Int32" Nullable="false" />
+    <Property Name="SpecialityId" Type="Int32" Nullable="false" />
+    <Property Name="ClassRoom" Type="Int32" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Magazine" Relationship="Self.FK_Magazine_Group" FromRole="Group" ToRole="Magazine" />
+  </EntityType>
+  <EntityType Name="Magazine">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TeacherId" Type="Int32" Nullable="false" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <Property Name="DisciplineId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Discipline" Relationship="Self.FK_Magazine_Discipline" FromRole="Magazine" ToRole="Discipline" />
+    <NavigationProperty Name="Group" Relationship="Self.FK_Magazine_Group" FromRole="Magazine" ToRole="Group" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Magazine_User" FromRole="Magazine" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Speciality">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Magazine" Relationship="Self.FK_Magazine_User" FromRole="User" ToRole="Magazine" />
+  </EntityType>
+  <Association Name="FK_Magazine_Discipline">
+    <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+    <End Role="Magazine" Type="Self.Magazine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discipline">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Magazine">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Magazine_Group">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Magazine" Type="Self.Magazine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Magazine">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Magazine_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Magazine" Type="Self.Magazine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Magazine">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Discipline" EntityType="Self.Discipline" />
+    <EntitySet Name="Group" EntityType="Self.Group" />
+    <EntitySet Name="Magazine" EntityType="Self.Magazine" />
+    <EntitySet Name="Speciality" EntityType="Self.Speciality" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <AssociationSet Name="FK_Magazine_Discipline" Association="Self.FK_Magazine_Discipline">
+      <End Role="Discipline" EntitySet="Discipline" />
+      <End Role="Magazine" EntitySet="Magazine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Magazine_Group" Association="Self.FK_Magazine_Group">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="Magazine" EntitySet="Magazine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Magazine_User" Association="Self.FK_Magazine_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Magazine" EntitySet="Magazine" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

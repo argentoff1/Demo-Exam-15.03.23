@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Discipline">
+      <EntityTypeMapping TypeName="Model.Discipline">
+        <MappingFragment StoreEntitySet="Discipline">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Group">
+      <EntityTypeMapping TypeName="Model.Group">
+        <MappingFragment StoreEntitySet="Group">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="YearOfAdmission" ColumnName="YearOfAdmission" />
+          <ScalarProperty Name="Subgroup" ColumnName="Subgroup" />
+          <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
+          <ScalarProperty Name="ClassRoom" ColumnName="ClassRoom" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Magazine">
+      <EntityTypeMapping TypeName="Model.Magazine">
+        <MappingFragment StoreEntitySet="Magazine">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="DisciplineId" ColumnName="DisciplineId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Speciality">
+      <EntityTypeMapping TypeName="Model.Speciality">
+        <MappingFragment StoreEntitySet="Speciality">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="Model.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
